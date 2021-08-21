@@ -4,8 +4,8 @@ import { fetchPosts } from '../api/index';
 
 export const getPosts = () => async (dispatch) => {
 	try {
-		const getData = await axios.get(fetchPosts());
-		dispatch({ type: 'FETCH_ALL', payload: getData.data });
+		const { data } = await api.fetchPosts();
+		dispatch({ type: 'FETCH_ALL', payload: data });
 	} catch (err) {
 		console.log(err.message);
 	}

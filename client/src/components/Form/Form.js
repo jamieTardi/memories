@@ -4,7 +4,7 @@ import useStyles from './styles';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import FileBase from 'react-file-base64';
 import { useDispatch } from 'react-redux';
-import { createPost } from '../../api';
+import { createPost } from '../../actions/posts';
 
 const Form = () => {
 	const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const Form = () => {
 
 	const handleSubmit = (e) => {
 		console.log(e);
-		e.prevent.default();
+		e.preventDefault();
 		dispatch(createPost(postData));
 	};
 
