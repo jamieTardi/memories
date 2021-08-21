@@ -3,6 +3,7 @@ import useStyles from './styles';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import { useDispatch } from 'react-redux';
 
 import {
 	Card,
@@ -16,15 +17,17 @@ import moment from 'moment';
 
 const Post = ({ post }) => {
 	const classes = useStyles();
-	console.log(post);
+	const dispatch = useDispatch();
+
 	return (
 		<div>
 			<Card className={classes.card}>
 				<CardMedia
 					className={classes.media}
-					image={postMessage.selectedFile}
+					image={post.selectedFile}
 					title={post.title}
 				/>
+
 				<div className={classes.overlay}>
 					<Typography variant='h6'>{post.creator}</Typography>
 					<Typography variant='body2'>
@@ -32,7 +35,12 @@ const Post = ({ post }) => {
 					</Typography>
 				</div>
 				<div className={classes.overlay2}>
-					<Button style={{ color: 'white' }} size='small' onClick={() => {}}>
+					<Button
+						style={{ color: 'white' }}
+						size='small'
+						onClick={() => {
+							dispatch({ type: 'ADD_ID', payload: post._id });
+						}}>
 						<ion-icon name='ellipsis-horizontal-outline'></ion-icon>
 					</Button>
 				</div>
@@ -55,7 +63,6 @@ const Post = ({ post }) => {
 					<Button size='small' color='primary' onClick={() => {}}>
 						<ion-icon name='trash'></ion-icon>
 						Delete
-						{post.likeCount}
 					</Button>
 				</CardActions>
 			</Card>

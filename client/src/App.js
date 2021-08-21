@@ -7,14 +7,16 @@ import Posts from './components/Posts/Posts';
 import Form from './components/Form/Form';
 import useStyles from './styles';
 import fetchPosts from './api/index';
+import { useSelector } from 'react-redux';
 
 const App = () => {
 	const dispatch = useDispatch();
 	const classes = useStyles();
+	const currentId = useSelector((state) => state.currentId);
 
 	useEffect(() => {
 		dispatch(getPosts());
-	}, [dispatch]);
+	}, [currentId, dispatch]);
 	return (
 		<Container maxidth='lg'>
 			<AppBar className={classes.appBar} position='static' color='inherit'>
