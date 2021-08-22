@@ -1,8 +1,5 @@
 import React from 'react';
 import useStyles from './styles';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
-import DeleteIcon from '@material-ui/icons/Delete';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { useDispatch } from 'react-redux';
 
 import {
@@ -14,6 +11,7 @@ import {
 	Typography,
 } from '@material-ui/core';
 import moment from 'moment';
+import { deletePost } from '../../../actions/posts';
 
 const Post = ({ post }) => {
 	const classes = useStyles();
@@ -49,6 +47,9 @@ const Post = ({ post }) => {
 						{post.tags.map((tag) => `#${tag}`)}
 					</Typography>
 				</div>
+				<Typography variant='h5' gutterBottom className={classes.title}>
+					{post.title}
+				</Typography>
 				<CardContent>
 					<Typography variant='h5' gutterBottom>
 						{post.message}
@@ -60,7 +61,12 @@ const Post = ({ post }) => {
 						Like
 						{post.likeCount}
 					</Button>
-					<Button size='small' color='primary' onClick={() => {}}>
+					<Button
+						size='small'
+						color='primary'
+						onClick={() => {
+							dispatch(deletePost(post._id));
+						}}>
 						<ion-icon name='trash'></ion-icon>
 						Delete
 					</Button>
